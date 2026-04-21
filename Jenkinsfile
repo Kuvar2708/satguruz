@@ -1,24 +1,14 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven'
+    parameters {
+        string(name: 'ENV', defaultValue: 'DEV')
     }
 
     stages {
-        stage('Clone') {
+        stage('Show Env') {
             steps {
-                git branch: 'main', url: 'https://github.com/Kuvar2708/satguruz.git'
-            }
-        }
-        stage('Build') {
-            steps {
-                bat 'mvn clean install'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
+                echo "Environment: ${params.ENV}"
             }
         }
     }
